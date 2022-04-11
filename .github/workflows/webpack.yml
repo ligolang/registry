@@ -1,0 +1,53 @@
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [17.x]
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies of the workspace
+      run: yarn
+
+    - name: Build Client assets
+      working-directory: client
+      run: yarn build
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: client-assets
+        path: client/build
+
+    - name: Build Client SSR library
+      working-directory: client
+      run: yarn react-scripts tsc
+      
+    - uses: actions/upload-artifact@v3
+      with:
+        name: ssr-lib
+        path: client/lib
+        
+    - name: Build Server
+      working-directory: server
+      run: yarn build
+      
+    - uses: actions/upload-artifact@v3
+      with:
+        name: server
+        path: server/server.bundle.js
