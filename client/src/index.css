@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+  background-color: #fff;
+}
+
+body {
+  margin: 0;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+#root {
+  height: 100%;
+}
+
+main {
+  /* height: 200%; */
+  height: 100%;
+}
+
+/* main section { */
+/*     height: 50%; */
+/* } */
+
+h1 {
+  color: #272d2d;
+  font-size: 60px;
+  font-family: Raleway, sans-serif;
+}
+
+h2 {
+  color: #333b3b;
+  font-size: 48px;
+}
+
+h3 {
+  color: #3f4848;
+  font-size: 36px;
+}
+
+h4,
+th {
+  color: #4b5656;
+  font-size: 24px;
+}
+
+p {
+  color: #576464;
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+table {
+  table-layout: auto;
+  font-size: 1.125rem;
+}
+
+thead {
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  text-align: right;
+  padding: 0.5rem 0;
+  font-weight: normal;
+  color: #004fff;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 0.25rem 0;
+}
+
+td:nth-child(2) {
+  text-align: right;
+  width: 25%;
+}
+
+.mg-version {
+  font-style: italic;
+  color: #6f7f7f;
+}
+
+input {
+  border: 1px solid #ccc;
+  font-size: 1.125rem;
+}
+
+input::placeholder {
+  color: #ccc;
+}
+
+input:focus {
+  outline-color: #004fff;
+}
+
+input:focus > button {
+  background-color: red;
+}
+
+.mg-search-term {
+  color: #004fff;
+}
