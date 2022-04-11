@@ -1,0 +1,34 @@
+article {
+    width: 640px;
+    margin: auto;
+    padding: 4rem 0;
+}
+
+article h1,
+article a,
+article a:visited {
+      color: #004fff;
+}
+
+article h1 {
+    margin: 3rem 0;
+    text-align: center;
+    font-size: 3rem;
+}
+
+article h2 {
+    color: #444;
+    margin-top: 2.5rem;
+    line-height: 1.75;
+    font-size: 1.75rem;
+}
+
+article p {
+    margin: 0.5rem 0;
+    line-height: 1.75;
+}
+
+article li {
+    margin: 0.75rem 0 0.75rem 1rem;
+    list-style-type: circle;
+}
