@@ -22,28 +22,23 @@ api.get(
   "/search",
   function (
     request: express.Request<
-      { packageName: string },
+      { query: string },
       any,
-      { packageName: string },
-      { packageName: string },
+      { query: string },
+      { query: string },
       Record<string, null>
     >,
     response: express.Response
   ) {
-    let { packageName } = request.query;
-    if (!packageName) {
+    let { query } = request.query;
+    if (!query) {
       response.status(400).json({ message: "Package name empty" });
       return;
     }
-    let { validForNewPackages, warnings } = validateNpmPackageName(packageName);
-    if (validForNewPackages) {
-      packageName = decodeURIComponent(packageName);
-      return fetch(`https://registry.npmjs.cf/-/v1/search?text=${packageName}`)
-        .then((r) => r.json())
-        .then(({ objects }) => response.status(200).json(objects));
-    } else {
-      return Promise.reject(warnings);
-    }
+    query = decodeURIComponent(query);
+    return fetch(`https://registry.npmjs.cf/-/v1/search?text=${query},ligo`)
+      .then((r) => r.json())
+      .then(({ objects }) => response.status(200).json(objects));
   }
 );
 
