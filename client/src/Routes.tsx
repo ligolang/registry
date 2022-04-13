@@ -17,15 +17,15 @@ let routes = [
     action: () => <FirstFold search={search} />,
   },
   {
-    path: "/search/:packageName",
+    path: "/search/:query",
     action: (context: any) => {
       let {
-        params: { packageName },
+        params: { query },
       } = context;
-      return fetch(`/api/search?packageName=${packageName}`)
+      return fetch(`/api/search?query=${query}`)
         .then((r) => r.json())
         .then((packages) => {
-          return <Search searchTerm={packageName} results={packages} />;
+          return <Search searchTerm={query} results={packages} />;
         });
     },
   },
