@@ -11,5 +11,6 @@ RUN npm pack
 WORKDIR ../server
 RUN yarn build
 ENV CRA_BUILD_DIR=/app/client/build
+ENV DEBUG=app
 ENTRYPOINT ["node", "server.bundle.js"]
 
