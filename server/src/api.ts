@@ -36,7 +36,7 @@ api.get(
       return;
     }
     query = decodeURIComponent(query);
-    return fetch(`https://registry.npmjs.cf/-/v1/search?text=${query}`)
+    return fetch(`https://registry.npmjs.cf/-/v1/search?text=${query},ligo`)
       .then((r) => r.json())
       .then(({ objects }) => response.status(200).json(objects));
   }
