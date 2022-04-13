@@ -5,12 +5,14 @@ import express from "express";
 import bodyParser from "body-parser";
 import api from "./api";
 import react from "./react";
+import morgan from "morgan";
 
 let log = debug("app");
 
 const app = express();
 const port = 4000;
 
+app.use(morgan(process.env.NODE_ENV === "development" ? "dev" : "combined"));
 app.get("/manifest.json", express.static(process.env.CRA_BUILD_DIR!));
 app.use(
   "/icons",
