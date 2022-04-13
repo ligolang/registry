@@ -24,17 +24,10 @@ export function FirstFold({ search }: props) {
       e.preventDefault();
       let form = e.target;
       let data = new FormData(form);
-      let inputPackageName = data.get("query");
+      let query = data.get("query");
       try {
-        let nullCheckedPackageName = nullCheck(inputPackageName);
-        let { validForNewPackages, warnings } = validateNpmPackageName(
-          nullCheckedPackageName
-        );
-        if (validForNewPackages) {
-          history.push(`/search/${nullCheckedPackageName}`, null);
-        } else {
-          return Promise.reject(warnings);
-        }
+        let nullCheckedPackageName = nullCheck(query);
+        history.push(`/search/${nullCheckedPackageName}`, null);
       } catch (e) {
         return Promise.reject(e);
       }
