@@ -58,3 +58,8 @@ CRA_BUILD_DIR=/path/to/source/client/build yarn nodemon server.bundle.js
 # or
 CRA_BUILD_DIR=/path/to/source/client/build yarn start
 ```
+
+## Logs
+Server uses [`debug`](https://www.npmjs.com/package/debug) - setting
+`DEBUG=app` would log app-level logs. Similarly, `DEBUG=*` would log
+everything in the stack that uses the `debug` module.
