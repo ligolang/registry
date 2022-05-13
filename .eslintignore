@@ -11,3 +11,5 @@ wiki/
 dist/
 docs/
 test/functional/store/*
+packages/react-scripts/*
+**/lib/*

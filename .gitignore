@@ -50,3 +50,11 @@ api-results*.json
 #docs 
 ./api
 packages/core/core/docs
+
+# ligo
+packages/ligo-ui/lib
+storage
+*~
+plugins/
+htpasswd
+config.yaml

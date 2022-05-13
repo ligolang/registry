@@ -1,0 +1,57 @@
+.ligo-app-header-bottom {
+    border-bottom: 1px solid #EEE;
+}
+
+article {
+    padding: 0 6rem;
+}
+
+article h1,
+article a,
+article a:visited {
+      color: #004fff;
+}
+
+article h1 {
+    margin: 3rem 0;
+    text-align: center;
+    font-size: 3rem;
+}
+
+article h2 {
+    color: #444;
+    margin-top: 2.5rem;
+    line-height: 1.75;
+    font-size: 1.75rem;
+}
+
+article p {
+    width: 480px;
+    margin: 0.5rem 0;
+    line-height: 1.75;
+}
+
+article pre {
+    margin: 2rem 0;
+}
+
+article li {
+    margin: 0.75rem 0 0.75rem 1rem;
+    list-style-type: circle;
+}
+
+aside {
+    width: 640px;
+    padding: 0 6rem;
+}
+
+aside h2 {
+    font-size: 1.25rem;
+    color: #444;
+}
+
+aside p {
+    font-size: 1.5rem;
+    color: #111;
+    margin-bottom: 2rem;
+}

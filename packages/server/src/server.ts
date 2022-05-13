@@ -17,7 +17,7 @@ import { errorReportingMiddleware, final, log } from '@verdaccio/middleware';
 import { Storage } from '@verdaccio/store';
 import { ConfigRuntime } from '@verdaccio/types';
 import { Config as IConfig, IPlugin, IPluginStorageFilter } from '@verdaccio/types';
-import webMiddleware from '@verdaccio/web';
+import { ligoWebMiddleware } from '@verdaccio/web';
 
 import { $NextFunctionVer, $RequestExtend, $ResponseExtend } from '../types/custom';
 import hookDebug from './debug';
@@ -89,13 +89,17 @@ const defineAPI = function (config: IConfig, storage: Storage): any {
     plugin.register_middlewares(app, auth, storage);
   });
 
+  // ~~Can't prefix it with /-/api because it will break clients like npm, yarn etc~~
+  // Update: npm clients could simple use the http://address/-/api are the URL
+  // Can't place it before webRender because of path clashes
   // For  npm request
   // @ts-ignore
-  app.use(apiEndpoint(config, auth, storage));
+  app.use("/-/api", apiEndpoint(config, auth, storage));
 
   // For WebUI & WebUI API
   if (_.get(config, 'web.enable', true)) {
-    app.use(webMiddleware(config, auth, storage));
+    // @ts-ignore
+    app.use(ligoWebMiddleware(config, auth, storage));
   } else {
     app.get('/', function (req: $RequestExtend, res: $ResponseExtend, next: $NextFunctionVer) {
       next(errorUtils.getNotFound(API_ERROR.WEB_DISABLED));
