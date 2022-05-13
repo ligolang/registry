@@ -1,0 +1,44 @@
+* Typography
+
+Google fonts family selected: https://fonts.google.com/share?selection.family=Raleway:wght@600%7CRoboto:wght@300;400;500
+
+* NPM API
+https://github.com/npm/registry/blob/master/docs/download-counts.md
+https://registry.npmjs.com/-/v1/search?text=ligo
+https://github.com/npm/registry/blob/master/docs/REGISTRY-API.md
+
+** Notes
+*** all packages now that =/-/all= has been deprecated
+*** For SPA (DOESNT WORK) - https://registry.npmjs.cf/ from https://www.edoardoscibona.com/exploring-the-npm-registry-api
+Failed with
+#+begin_quote
+Access to fetch at 'https://registry.npmjs.cf/-/v1/search?text=ligo-foo' from origin 'http://localhost:3000' has been blocked by CORS policy: The 'Access-Control-Allow-Origin' header contains multiple values '*, *', but only one is allowed. Have the server send the header with a valid value, or, if an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+#+end_quote
+*** Yarn: =git://= instead of =https://=
+
+Yarn sometimes has fetching packages from Git repositories directly
+over =https://=
+
+Add the following to =.git/config=
+
+#+begin_src conf
+  [url "https://"]
+	  insteadOf = git://
+#+end_src
+
+*** Security
+**** Package level
+ https://verdaccio.org/docs/protect-your-dependencies/
+ https://verdaccio.org/docs/configuration#packages
+**** Auth
+PS: htpasswd
+**** Proxy property??
+    # To improve your security configuration and  avoid dependency confusion
+    # consider removing the proxy property for private packages
+    # https://verdaccio.org/docs/best#remove-proxy-to-increase-security-at-private-packages
+**** General
+    # https://verdaccio.org/docs/configuration#security
+**** User rate limiting
+    # https://verdaccio.org/docs/configuration#user-rate-limit
+
+

@@ -1,0 +1,15 @@
+{
+  "short_name": "Ligo Registry",
+  "name": "Ligo package registry",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "type": "image/svg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

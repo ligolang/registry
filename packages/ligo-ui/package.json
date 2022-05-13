@@ -1,0 +1,54 @@
+{
+  "name": "@ligo-registry/ui",
+  "version": "0.1.0-dev",
+  "proxy": "http://0.0.0.0:4000",
+  "main": "lib/exports.js",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@types/node": "^16.11.26",
+    "@types/node-fetch": "2.6.1",
+    "node-fetch": "2.6.7",
+    "@types/react": "17.x",
+    "@types/react-dom": "^17.0.13",
+    "@types/react-syntax-highlighter": "15.x",
+    "@ligo-registry/ui": "^0.1.0-dev",
+    "history": "^5.3.0",
+    "react": "17.x",
+    "react-dom": "17.x",
+    "react-markdown": "^6.0.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "remark-gfm": "^3.0.1",
+    "universal-router": "^9.1.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-flow": "^7.14.5",
+    "@babel/plugin-transform-react-jsx": "^7.14.9",
+    "@types/jest": "^27.4.1",
+    "@types/validate-npm-package-name": "*",
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.8",
+    "react-scripts": "5.0.0",
+    "tailwindcss": "^3.0.23",
+    "typescript": "^4.6.2",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build:server": "react-scripts tsc",
+    "build": "pnpm build:server && pnpm build:client",
+    "build:client": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

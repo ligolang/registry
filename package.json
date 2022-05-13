@@ -15,6 +15,7 @@
     "url": "https://opencollective.com/verdaccio"
   },
   "devDependencies": {
+    "nodemon": "*",
     "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
     "@babel/node": "7.16.8",
@@ -153,7 +154,10 @@
   },
   "license": "MIT",
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,yml,yaml,md}": "prettier --write",
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
+    "ignore-this-*.{js,jsx,ts,tsx,json,yml,yaml,md}": "prettier --write",
+    "ignore-this-*.{js,jsx,ts,tsx}": "eslint --cache --fix"
+  },
+  "dependencies": {
+    "@ligo-registry/ui": "^0.1.0-dev"
   }
 }

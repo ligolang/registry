@@ -31,6 +31,8 @@ ENV VERDACCIO_APPDIR=/opt/verdaccio \
 ENV PATH=$VERDACCIO_APPDIR/docker-bin:$PATH \
     HOME=$VERDACCIO_APPDIR
 
+ENV CRA_BUILD_DIR=$VERDACCIO_APPDIR/packages/ligo-ui/build
+
 WORKDIR $VERDACCIO_APPDIR
 
 RUN apk --no-cache add openssl dumb-init
