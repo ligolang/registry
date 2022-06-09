@@ -38,16 +38,17 @@ function addPackageWebApi(storage: Storage, auth: IAuth, config: Config): Router
       debug('is login disabled %o', isLoginEnabled);
       // FIXME: this logic does not work, review
       // const remoteUserAccess = !isLoginEnabled ? anonymousRemoteUser : remoteUser;
-      try {
-        auth.allow_access({ packageName: name }, remoteUser, (err, allowed): void => {
-          if (err) {
-            resolve(false);
-          }
-          resolve(allowed);
-        });
-      } catch (err: any) {
-        reject(err);
-      }
+      // try {
+      //   auth.allow_access({ packageName: name }, remoteUser, (err, allowed): void => {
+      //     if (err) {
+      //       resolve(false);
+      //     }
+      //     resolve(allowed);
+      //   });
+      // } catch (err: any) {
+      //   reject(err);
+      // }
+      resolve(true);
     });
 
   // Get list of all visible package
