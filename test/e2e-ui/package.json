@@ -13,6 +13,6 @@
     "rimraf": "3.0.2"
   },
   "scripts": {
-    "test": "jest --config jest.config.e2e.js"
+    "test": "jest --config jest.config.ligo-e2e.js"
   }
 }
