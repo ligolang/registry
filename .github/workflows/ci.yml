@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - dev
       - 'changeset-release/master'
   pull_request:
     paths:
