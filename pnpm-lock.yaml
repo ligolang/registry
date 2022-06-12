@@ -692,15 +692,12 @@ importers:
       '@verdaccio/core': workspace:6.0.0-6-next.5
       '@verdaccio/streams': workspace:11.0.0-6-next.5
       '@verdaccio/types': workspace:11.0.0-6-next.12
-      fast-crc32c: 1.0.7
       memory-fs: 0.5.0
     dependencies:
       '@google-cloud/datastore': 6.5.0
       '@google-cloud/storage': 5.14.0
       '@verdaccio/core': link:../../core/core
       '@verdaccio/streams': link:../../core/streams
-    optionalDependencies:
-      fast-crc32c: 1.0.7
     devDependencies:
       '@verdaccio/types': link:../../core/types
       memory-fs: 0.5.0
@@ -17042,15 +17039,6 @@ packages:
     resolution: {integrity: sha1-lpGEQOMEGnpBT4xS48V06zw+HgU=}
     engines: {'0': node >=0.6.0}
 
-  /fast-crc32c/1.0.7:
-    resolution: {integrity: sha512-yaAnvfGr8YWu6V2cqr2303/V1jXXVaOJCGtln7awIY/ocxWyUCdYbp8RoN7oSRq4lFA4ygMT/Lk/0sZTduJPPA==}
-    engines: {node: '>= 0.10.0'}
-    requiresBuild: true
-    optionalDependencies:
-      sse4_crc32: 6.0.1
-    dev: false
-    optional: true
-
   /fast-decode-uri-component/1.0.1:
     resolution: {integrity: sha512-WKgKWg5eUxvRZGwW8FvfbaH7AXSh2cL+3j5fMGzUMCxWBJ3dV3a7Wz8y2f/uQ0e3B6WmodD3oS54jTQ9HVTIIg==}
 
@@ -22052,11 +22040,6 @@ packages:
       semver: 5.7.1
     dev: true
 
-  /node-addon-api/1.7.2:
-    resolution: {integrity: sha512-ibPK3iA+vaY1eEjESkQkM0BbCqFOaZMiXRTtdB0u7b4djtY6JnsjvPdUHVMg6xQt3B8fpTTWHI9A+ADjM9frzg==}
-    dev: false
-    optional: true
-
   /node-emoji/1.11.0:
     resolution: {integrity: sha512-wo2DpQkQp7Sjm2A0cq+sN7EHKO6Sl0ctXeBdFZrL9T9+UywORbufTcTZxom8YqpLQt/FqNMUkOpkZrJVYSKD3A==}
     dependencies:
@@ -26985,16 +26968,6 @@ packages:
 
   /sprintf-js/1.0.3:
     resolution: {integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=}
-
-  /sse4_crc32/6.0.1:
-    resolution: {integrity: sha512-FUTYXpLroqytNKWIfHzlDWoy9E4tmBB/RklNMy6w3VJs+/XEYAHgbiylg4SS43iOk/9bM0BlJ2EDpFAGT66IoQ==}
-    engines: {node: '>=4'}
-    requiresBuild: true
-    dependencies:
-      bindings: 1.5.0
-      node-addon-api: 1.7.2
-    dev: false
-    optional: true
 
   /sshpk/1.16.1:
     resolution: {integrity: sha512-HXXqVUq7+pcKeLqqZj6mHFUMvXtOJt1uoUx09pFW6011inTMxqI8BA8PM95myrIyyKwdnzjdFjLiE6KBPVtJIg==}
