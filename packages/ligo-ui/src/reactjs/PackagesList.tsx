@@ -20,7 +20,7 @@ export function PackagesList(props: props) {
           <p>v{pkg.version}</p>
           <p>
             {' '}
-            <span className="text-gray-400">By</span> {(pkg.author && pkg.author.name) || ''}{' '}
+            <span className="text-gray-400">By</span> {pkg.author?.name || ''}{' '}
           </p>
           <p>{pkg.description}</p>
         </section>
