@@ -1,4 +1,3 @@
-const protectedPackageMetadata = require('./partials/pkg-protected');
 const testPackageMetadata = require('./partials/pkg');
 
 describe('/ (Verdaccio Page)', () => {
@@ -10,35 +9,6 @@ describe('/ (Verdaccio Page)', () => {
     const button = await page.$(selector);
     await button.focus();
     await button.click(options);
-  };
-
-  const evaluateSignIn = async function (matchText = 'Login') {
-    const text = await page.evaluate(() => {
-      return document.querySelector('button[data-testid="header--button-login"]').textContent;
-    });
-
-    expect(text).toMatch(matchText);
-  };
-
-  const getPackages = async function () {
-    return await page.$$('.package-title');
-  };
-
-  const logIn = async function () {
-    await clickElement('div[data-testid="dialogContentLogin"]');
-    const userInput = await page.$('#login--dialog-username');
-    expect(userInput).not.toBeNull();
-    const passInput = await page.$('#login--dialog-password');
-    expect(passInput).not.toBeNull();
-    await userInput.type('test', { delay: 100 });
-    await passInput.type('test', { delay: 100 });
-    await passInput.dispose();
-    // click on log in
-    const loginButton = await page.$('#login--dialog-button-submit');
-    expect(loginButton).toBeDefined();
-    await loginButton.focus();
-    await loginButton.click({ delay: 100 });
-    await page.waitForTimeout(500);
   };
 
   beforeAll(async () => {

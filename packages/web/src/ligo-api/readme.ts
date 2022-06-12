@@ -66,11 +66,7 @@ function addReadmeWebApi(config: Config, storage: Storage, auth: IAuth): Router 
         fs.mkdirSync(xPath);
         await tar.x({
           C: xPath,
-          file: path.join(
-            config.storage,
-            info.name,
-            `${info.name}-${version}.tgz`
-          ),
+          file: path.join(config.storage, info.name, `${info.name}-${version}.tgz`),
         });
         let readmePath = path.join(xPath, 'package', readmeFilename);
         let readme = fs.readFileSync(readmePath).toString();

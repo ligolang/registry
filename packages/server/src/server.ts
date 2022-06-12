@@ -94,7 +94,7 @@ const defineAPI = function (config: IConfig, storage: Storage): any {
   // Can't place it before webRender because of path clashes
   // For  npm request
   // @ts-ignore
-  app.use("/-/api", apiEndpoint(config, auth, storage));
+  app.use('/-/api', apiEndpoint(config, auth, storage));
 
   // For WebUI & WebUI API
   if (_.get(config, 'web.enable', true)) {

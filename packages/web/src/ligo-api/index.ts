@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import { hasLogin } from '../utils/web-utils';
 import packagesApi from '../api/package';
 import search from '../api/search';
+import user from '../api/user';
+import { hasLogin } from '../utils/web-utils';
 import featured from './featured';
 import readme from './readme';
-import user from '../api/user';
 
 export default (auth, storage, config) => {
   const route = Router(); /* eslint new-cap: 0 */

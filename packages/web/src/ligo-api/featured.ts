@@ -57,7 +57,7 @@ function addFeatureWebApi(config: Config, storage: Storage, auth: IAuth): Router
           )
         );
 
-        next(featuredPackages.flat().filter(x => x !== null));
+        next(featuredPackages.flat().filter((x) => x !== null));
       } catch (err: any) {
         next(errorUtils.getInternalError(err.message));
       }

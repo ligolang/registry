@@ -1,7 +1,8 @@
+import express from 'express';
 import StdlibPath from 'path';
 import StdlibURL from 'url';
-import express from 'express';
-import renderReactApp from "./middleware/render-react-app";
+
+import renderReactApp from './middleware/render-react-app';
 import { ligoWebAPI } from './middleware/web-api';
 
 export default (config, auth, storage) => {
@@ -20,17 +21,11 @@ export default (config, auth, storage) => {
 
       It need not leak here
     */
-  app.get("/manifest.json", express.static(process.env.CRA_BUILD_DIR!));
-  app.use(
-    "/icons",
-    express.static(StdlibPath.join(process.env.CRA_BUILD_DIR!, "icons"))
-  );
-  app.get("/logo.svg", express.static(process.env.CRA_BUILD_DIR!));
-  app.get("/favicon.svg", express.static(process.env.CRA_BUILD_DIR!));
-  app.use(
-    "/static",
-    express.static(StdlibPath.join(process.env.CRA_BUILD_DIR!, "static"))
-  );
+  app.get('/manifest.json', express.static(process.env.CRA_BUILD_DIR!));
+  app.use('/icons', express.static(StdlibPath.join(process.env.CRA_BUILD_DIR!, 'icons')));
+  app.get('/logo.svg', express.static(process.env.CRA_BUILD_DIR!));
+  app.get('/favicon.svg', express.static(process.env.CRA_BUILD_DIR!));
+  app.use('/static', express.static(StdlibPath.join(process.env.CRA_BUILD_DIR!, 'static')));
 
   // web endpoints, search, packages, etc
   app.use(auth.apiJWTmiddleware());
