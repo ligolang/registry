@@ -5,12 +5,6 @@ describe('/ (Verdaccio Page)', () => {
   // this might be increased based on the delays included in all test
   jest.setTimeout(20000);
 
-  const clickElement = async function (selector, options = { delay: 100 }) {
-    const button = await page.$(selector);
-    await button.focus();
-    await button.click(options);
-  };
-
   beforeAll(async () => {
     page = await global.__BROWSER__.newPage();
     await page.goto('http://0.0.0.0:55558');

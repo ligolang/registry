@@ -1,6 +1,5 @@
 import express from 'express';
 import StdlibPath from 'path';
-import StdlibURL from 'url';
 
 import renderReactApp from './middleware/render-react-app';
 import { ligoWebAPI } from './middleware/web-api';

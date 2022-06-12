@@ -1,17 +1,13 @@
 import buildDebug from 'debug';
 import { Router } from 'express';
-import _ from 'lodash';
 
 import { IAuth } from '@verdaccio/auth';
 import { errorUtils } from '@verdaccio/core';
-import { DIST_TAGS, HTTP_STATUS } from '@verdaccio/core';
 import { $NextFunctionVer, $RequestExtend, $ResponseExtend, allow } from '@verdaccio/middleware';
 import { Storage } from '@verdaccio/store';
-import { convertDistRemoteToLocalTarballUrls } from '@verdaccio/tarball';
 import { Config, Package, Version } from '@verdaccio/types';
-import { addGravatarSupport, formatAuthor, isVersionValid } from '@verdaccio/utils';
 
-import { AuthorAvatar, addScope, deleteProperties } from '../utils/web-utils';
+import { AuthorAvatar } from '../utils/web-utils';
 
 export { $RequestExtend, $ResponseExtend, $NextFunctionVer }; // Was required by other packages
 

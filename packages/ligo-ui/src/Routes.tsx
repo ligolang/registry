@@ -204,9 +204,7 @@ let routes = [
                 .then((r) => r.json())
                 .then(({ data: readme }) => {
                   let repositoryUrl =
-                    (repository.url &&
-                      repository.url.replace(/^git\+/, '').replace(/\.git$/, '')) ||
-                    null;
+                    repository.url?.replace(/^git\+/, '').replace(/\.git$/, '') || null;
                   return (
                     <Package
                       name={packageName}

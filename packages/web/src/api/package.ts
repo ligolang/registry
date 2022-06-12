@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import buildDebug from 'debug';
 import { Router } from 'express';
 import _ from 'lodash';
@@ -115,3 +116,4 @@ function addPackageWebApi(storage: Storage, auth: IAuth, config: Config): Router
 }
 
 export default addPackageWebApi;
+/* eslint-enable @typescript-eslint/no-unused-vars */

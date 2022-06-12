@@ -3,13 +3,12 @@ import { Router } from 'express';
 import tar from 'tar';
 
 import { IAuth } from '@verdaccio/auth';
-import { HEADERS, HEADER_TYPE } from '@verdaccio/core';
 import { $NextFunctionVer, $RequestExtend, $ResponseExtend, allow } from '@verdaccio/middleware';
 import sanitizyReadme from '@verdaccio/readme';
 import { Storage } from '@verdaccio/store';
 import { Config, Package } from '@verdaccio/types';
 
-import { AuthorAvatar, addScope, parseReadme } from '../utils/web-utils';
+import { AuthorAvatar, addScope } from '../utils/web-utils';
 
 export { $RequestExtend, $ResponseExtend, $NextFunctionVer }; // Was required by other packages
 
