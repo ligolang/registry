@@ -1,5 +1,5 @@
 const protectedPackageMetadata = require('./partials/pkg-protected');
-const scopedPackageMetadata = require('./partials/pkg-scoped');
+const testPackageMetadata = require('./partials/pkg');
 
 describe('/ (Verdaccio Page)', () => {
   let page;
@@ -51,64 +51,39 @@ describe('/ (Verdaccio Page)', () => {
     await page.close();
   });
 
-  test('should display title', async () => {});
-  //
-
-  test('should match title with no packages published', async () => {
-    expect(true);
+  test('Home: should display title', async () => {
+    const text = await page.title();
+    await page.waitForTimeout(1000);
+    expect(text).toContain('Ligo package registry');
   });
-  //
 
-  // test('should match title with first step', async () => {
+  test('Home: should contain a search box', async () => {
+    let searchBoxElementHandle = await page.$('form input[name="query"]');
+    expect(
+      await searchBoxElementHandle.evaluate((node) => node.getAttribute('placeholder'))
+    ).toContain('Search');
+  });
 
-  // });
-  // //
+  test('Search Results: should load No results', async () => {
+    // await page.goto('http://0.0.0.0:55558/search/a-pkg-that-doesnt-exist');
+    await page.goto('http://0.0.0.0:55558/search/pk1-test');
+    let h1Handle = await page.$('h1');
+    expect(await h1Handle.evaluate((node) => node.innerText)).toContain('No results');
+    // // TODO
+    // //  error---  error on local search onEnd is not a function
+    // // Not possible to test non-empty list of search results right now, because in-memory backend doesnt implement search
+    // await global.__SERVER__.putPackage(testPackageMetadata.name, testPackageMetadata);
+    // await page.reload({ waitUntil: ['networkidle0', 'domcontentloaded'] });
+    // await page.waitForTimeout(2000);
+    // h1Handle = await page.$('html');
+    // expect(await h1Handle.evaluate((node) => node.innerHTML)).toContain('No results');
+  });
 
-  // test('should match title with second step', async () => {
-  // });
-  // //
-
-  // test('should match button Login to sign in', async () => {
-  // });
-  // //
-
-  // test('should click on sign in button', async () => {
-  // });
-  // //
-
-  // test('should log in an user', async () => {
-  // });
-
-  // test('should logout an user', async () => {
-  // });
-  // //
-
-  // test('should publish a package', async () => {
-  // });
-  // //
-
-  // test('should navigate to the package detail', async () => {
-  // });
-
-  // test('should contains last sync information', async () => {
-  // });
-  // //
-
-  // test('should display dependencies tab', async () => {
-  // });
-
-  // test('should display version tab', async () => {
-  // });
-
-  // test('should display uplinks tab', async () => {
-  // });
-
-  // test('should display readme tab', async () => {
-  // });
-
-  // test('should publish a protected package', async () => {
-  // });
-
-  // test('should go to 404 page', async () => {
-  // });
+  test.skip('Package View: should load package Readme and other details', async () => {
+    await page.goto('http://0.0.0.0:55558/package/pk1-test');
+    await global.__SERVER__.putPackage(testPackageMetadata.name, testPackageMetadata);
+    await page.waitForTimeout(5000);
+    let h1Handle = await page.$('html');
+    expect(await h1Handle.evaluate((node) => node.innerText)).toContain('No results');
+  });
 });
