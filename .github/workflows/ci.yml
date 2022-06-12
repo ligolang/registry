@@ -87,34 +87,34 @@ jobs:
         run: pnpm recursive install --frozen-lockfile --ignore-scripts
       - name: Lint
         run: pnpm format:check
-  build:
-    needs: [format, lint]
-    strategy:
-      fail-fast: true
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        ## Node 16 breaks UI test, jest issue
-        node_version: [16, 17]
-    name: ${{ matrix.os }} / Node ${{ matrix.node_version }}
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node ${{ matrix.node_version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node_version }}
-      - name: Install pnpm
-        run: npm i pnpm@6.32.15 -g
-      - uses: actions/cache@v3
-        with:
-          path: ~/.pnpm-store
-          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-      - name: Install
-        run: pnpm recursive install --frozen-lockfile --ignore-scripts
-      - name: build
-        run: pnpm build
-      - name: Test
-        run: pnpm test
+  # build:
+  #   needs: [format, lint]
+  #   strategy:
+  #     fail-fast: true
+  #     matrix:
+  #       os: [ubuntu-latest, windows-latest]
+  #       ## Node 16 breaks UI test, jest issue
+  #       node_version: [16, 17]
+  #   name: ${{ matrix.os }} / Node ${{ matrix.node_version }}
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Use Node ${{ matrix.node_version }}
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node_version }}
+  #     - name: Install pnpm
+  #       run: npm i pnpm@6.32.15 -g
+  #     - uses: actions/cache@v3
+  #       with:
+  #         path: ~/.pnpm-store
+  #         key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+  #     - name: Install
+  #       run: pnpm recursive install --frozen-lockfile --ignore-scripts
+  #     - name: build
+  #       run: pnpm build
+  #     - name: Test
+  #       run: pnpm test
   ci-e2e-ui:
     needs: [format, lint]
     runs-on: ubuntu-latest
