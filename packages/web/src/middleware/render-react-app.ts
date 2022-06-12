@@ -3,6 +3,9 @@ import URL from "url";
 import { promises as fs } from "fs";
 import path from "path";
 import { ReactSSR } from "@ligo-registry/ui";
+import buildDebug from 'debug';
+
+const debug = buildDebug('verdaccio:web:render:react-ssr');
 
 let react = express.Router();
 react.get("*", function (request, response) {
@@ -23,7 +26,9 @@ react.get("*", function (request, response) {
           );
       })
       .catch((e: Error) => {
-        console.error("Caught in react express router", e);
+        debug(`Caught in react express router while resolving ${request.originalUrl}`, e);
+        debug(e.message);
+        debug(JSON.stringify(e));
         // @ts-ignore
         response.status(e.status).end();
       });
