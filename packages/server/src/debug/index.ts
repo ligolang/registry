@@ -5,7 +5,7 @@ import { $NextFunctionVer, $RequestExtend, $ResponseExtend } from '../../types/c
 export default (app: Application, configPath: string): void => {
   // Hook for tests only
   app.get(
-    '/-/_debug',
+    '/-/api/-/_debug',
     function (req: $RequestExtend, res: $ResponseExtend, next: $NextFunctionVer): void {
       if (global.gc) {
         global.gc();
