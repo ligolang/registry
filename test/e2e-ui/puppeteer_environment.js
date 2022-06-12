@@ -4,7 +4,7 @@ const path = require('path');
 const debug = require('debug')('verdaccio:e2e:ui:puppeteer');
 
 const NodeEnvironment = require('jest-environment-node');
-const { yellow } = require('kleur');
+const { yellow, red } = require('kleur');
 const puppeteer = require('puppeteer');
 
 const VerdaccioProcess = require('./registry-launcher');
@@ -46,10 +46,25 @@ class PuppeteerEnvironment extends NodeEnvironment {
     const verdaccioPath = path.normalize(
       path.join(process.cwd(), '../../packages/verdaccio/debug/bootstrap.js')
     );
-    const fork = await process1.init(verdaccioPath);
-    const fork2 = await process2.init(verdaccioPath);
-    this.global.__VERDACCIO_E2E__ = fork[0];
-    this.global.__VERDACCIO__PROTECTED_E2E__ = fork2[0];
+    let fork;
+    try {
+      fork = await process1.init(verdaccioPath);
+      this.global.__VERDACCIO_E2E__ = fork[0];
+    } catch (e) {
+      debug(red('Error while initialising registry'));
+      debug(e);
+      this.global.__VERDACCIO_E2E__ = process1;
+    }
+
+    let fork2;
+    try {
+      fork2 = await process2.init(verdaccioPath);
+      this.global.__VERDACCIO__PROTECTED_E2E__ = fork2[0];
+    } catch (e) {
+      debug(red('Error while initialising registry'));
+      debug(e);
+      this.global.__VERDACCIO__PROTECTED_E2E__ = process2;
+    }
 
     debug(yellow('Setup Test Environment.'));
     await super.setup();
