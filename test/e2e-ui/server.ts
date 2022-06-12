@@ -60,7 +60,7 @@ function buildToken(type: string, token: string): string {
 }
 
 const buildAuthHeader = (user, pass): string => {
-  return buildToken(TOKEN_BASIC, new Buffer(`${user}:${pass}`).toString('base64'));
+  return buildToken(TOKEN_BASIC, Buffer.from(`${user}:${pass}`).toString('base64'));
 };
 
 export default class Server implements ServerBridge {
