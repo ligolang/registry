@@ -30,6 +30,7 @@ export default class VerdaccioProcess {
     const verdaccioRegisterWrap: string = path.join(verdaccioPath);
     const childOptions = {
       silent: false,
+      env: { ...process.env, CRA_BUILD_DIR: path.join(__dirname, "..", "..", "packages", "ligo-ui", "build"),  }
     };
 
     const { configPath, port } = this.config;
