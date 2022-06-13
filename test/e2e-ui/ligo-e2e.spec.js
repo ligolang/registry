@@ -6,6 +6,7 @@ describe('/ (Verdaccio Page)', () => {
   jest.setTimeout(20000);
 
   beforeAll(async () => {
+    await global.__SERVER__.putPackage(testPackageMetadata.name, testPackageMetadata);
     page = await global.__BROWSER__.newPage();
     await page.goto('http://localhost:55558');
     page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
@@ -28,19 +29,15 @@ describe('/ (Verdaccio Page)', () => {
     ).toContain('Search');
   });
 
-  test.skip('Search Results: should load No results', async () => {
-    // await page.goto('http://localhost:55558/search/a-pkg-that-doesnt-exist');
-    await page.goto('http://localhost:55558/search/pk1-test');
+  test('Search Results: should load No results', async () => {
+    await page.goto('http://localhost:55558/search/a-pkg-that-doesnt-exist');
     let h1Handle = await page.$('h1');
     expect(await h1Handle.evaluate((node) => node.innerText)).toContain('No results');
-    // // TODO
-    // //  error---  error on local search onEnd is not a function
-    // // Not possible to test non-empty list of search results right now, because in-memory backend doesnt implement search
-    // await global.__SERVER__.putPackage(testPackageMetadata.name, testPackageMetadata);
-    // await page.reload({ waitUntil: ['networkidle0', 'domcontentloaded'] });
-    // await page.waitForTimeout(2000);
-    // h1Handle = await page.$('html');
-    // expect(await h1Handle.evaluate((node) => node.innerHTML)).toContain('No results');
+    await page.goto('http://localhost:55558/search/pk1-test');
+    h1Handle = await page.$('h1');
+    expect(await h1Handle.evaluate((node) => node.innerText)).toContain(
+      '1 results found for pk1-test'
+    );
   });
 
   test.skip('Package View: should load package Readme and other details', async () => {
