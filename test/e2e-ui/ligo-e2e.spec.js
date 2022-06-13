@@ -7,7 +7,7 @@ describe('/ (Verdaccio Page)', () => {
 
   beforeAll(async () => {
     page = await global.__BROWSER__.newPage();
-    await page.goto('http://0.0.0.0:55558');
+    await page.goto('http://localhost:55558');
     page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
   });
 
@@ -29,8 +29,8 @@ describe('/ (Verdaccio Page)', () => {
   });
 
   test.skip('Search Results: should load No results', async () => {
-    // await page.goto('http://0.0.0.0:55558/search/a-pkg-that-doesnt-exist');
-    await page.goto('http://0.0.0.0:55558/search/pk1-test');
+    // await page.goto('http://localhost:55558/search/a-pkg-that-doesnt-exist');
+    await page.goto('http://localhost:55558/search/pk1-test');
     let h1Handle = await page.$('h1');
     expect(await h1Handle.evaluate((node) => node.innerText)).toContain('No results');
     // // TODO
@@ -44,7 +44,7 @@ describe('/ (Verdaccio Page)', () => {
   });
 
   test.skip('Package View: should load package Readme and other details', async () => {
-    await page.goto('http://0.0.0.0:55558/package/pk1-test');
+    await page.goto('http://localhost:55558/package/pk1-test');
     await global.__SERVER__.putPackage(testPackageMetadata.name, testPackageMetadata);
     await page.waitForTimeout(5000);
     let h1Handle = await page.$('html');
