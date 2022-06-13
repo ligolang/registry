@@ -10,7 +10,7 @@ import { Search } from './reactjs/Search';
 
 let fetch =
   typeof window === 'undefined'
-    ? (path: string) => nodeFetch(`http://localhost:4000${path}`)
+    ? (path: string) => nodeFetch(`http://127.0.0.1:4000${path}`)
     : window.fetch;
 
 let routes = [
