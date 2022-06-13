@@ -28,7 +28,7 @@ describe('/ (Verdaccio Page)', () => {
     ).toContain('Search');
   });
 
-  test('Search Results: should load No results', async () => {
+  test.skip('Search Results: should load No results', async () => {
     // await page.goto('http://0.0.0.0:55558/search/a-pkg-that-doesnt-exist');
     await page.goto('http://0.0.0.0:55558/search/pk1-test');
     let h1Handle = await page.$('h1');
