@@ -3,16 +3,7 @@ web:
   title: verdaccio-server-e2e
   login: true
 
-store:
-  memory:
-    limit: 10
-
-auth:
-  auth-memory:
-    users:
-      test:
-        name: test
-        password: test
+storage: ./storage
 
 log: { type: stdout, format: pretty, level: info }
 

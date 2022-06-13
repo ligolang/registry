@@ -6,6 +6,7 @@ describe('/ (Verdaccio Page)', () => {
   jest.setTimeout(20000);
 
   beforeAll(async () => {
+    await global.__SERVER__.putPackage(testPackageMetadata.name, testPackageMetadata);
     page = await global.__BROWSER__.newPage();
     await page.goto('http://localhost:55558');
     page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
@@ -28,10 +29,10 @@ describe('/ (Verdaccio Page)', () => {
     ).toContain('Search');
   });
 
-  test.skip('Search Results: should load No results', async () => {
+  test('Search Results: should load No results', async () => {
     // await page.goto('http://localhost:55558/search/a-pkg-that-doesnt-exist');
     await page.goto('http://localhost:55558/search/pk1-test');
-    let h1Handle = await page.$('h1');
+    let h1Handle = await page.$('html');
     expect(await h1Handle.evaluate((node) => node.innerText)).toContain('No results');
     // // TODO
     // //  error---  error on local search onEnd is not a function
