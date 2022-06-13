@@ -16,7 +16,29 @@ let fetch =
 let routes = [
   {
     path: '',
-    action: () => <Home />,
+    action: () => {
+      return fetch(`/-/ui/featured`)
+        .then(
+          (r) => {
+            if (r.status === 200) {
+              return r.json();
+            } else {
+              return [];
+            }
+          },
+          () => [] // TODO(prometheansacrifice) error handling
+        )
+        .then((packages) => (
+          <Home
+            packages={packages
+              .filter((p: any) => p !== null && !!p['dist-tags'])
+              .map((p: any) => {
+                return p.versions[p['dist-tags'].latest];
+              })
+              .sort()}
+          />
+        ));
+    },
   },
   {
     path: '/search/:query',

@@ -17,7 +17,7 @@ describe('/ (Verdaccio Page)', () => {
 
   test('Home: should display title', async () => {
     const text = await page.title();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(4000);
     expect(text).toContain('Ligo package registry');
   });
 

@@ -2,34 +2,63 @@ import * as React from 'react';
 
 import { HistoryContext } from '../HistoryContext';
 import { handleSubmit } from '../handlers';
+import type { pkg } from '../types';
+import { Link } from './Link';
 
-export function FirstFold() {
+type props = {
+  packages: pkg[];
+};
+export function FirstFold(props: props) {
+  let { packages } = props;
   return (
-    <section className="w-full p-6 mt-12 md:w-2/3 lg:w-1/2 m-auto lg:flex-1 lg:flex flex-col items-center justify-center">
-      <img className="w-32 block ml-auto mr-auto" src="/logo.svg" alt="Ligo Logo" />
-      <h1 className="mt-6 text-center leading-tight">Ligo package registry</h1>
-      <p className="mt-6 leading-normal text-center text-3xl">
-        Get started with thousands of community powered packages
-      </p>
+    <section className="w-full p-6 lg:flex-1 lg:flex flex-col items-center">
       <HistoryContext.Consumer>
         {(history) => (
-          <form onSubmit={handleSubmit(history)} className="mt-10 w-full relative">
-            <input
-              name="query"
-              className="w-full absolute top-0 left-0 h-16 block rounded-full p-4 pl-6"
-              placeholder="Search a package..."
-            />
-            <button
-              type="submit"
-              className="h-16 w-16 mr-6 absolute top-0 right-0 rounded-full w-6 h-6"
+          <>
+            <header className="flex flex-row md:w-2/3 lg:w-1/2 m-auto">
+              <img className="w-24 block ml-16 mr-0" src="/logo.svg" alt="Ligo Logo" />
+              <h1 className="m-6 text-center uppercase leading-tight">Ligo Registry</h1>
+            </header>
+            <form
+              style={{ height: '5rem' }}
+              onSubmit={handleSubmit(history)}
+              className="mt-4 md:w-2/3 lg:w-1/2 w-full relative"
             >
-              <img
-                className="absolute top-0 right-0 w-8 h-16 block"
-                src="./icons/search.svg"
-                alt="search"
+              <input
+                name="query"
+                className="w-full absolute top-0 left-0 h-16 block rounded-full p-4 pl-6"
+                placeholder="Search and see what the community has to offer"
               />
-            </button>
-          </form>
+              <button
+                type="submit"
+                className="h-16 w-16 mr-6 absolute top-0 right-0 rounded-full w-6 h-6"
+              >
+                <img
+                  className="absolute top-0 right-0 w-8 h-16 block"
+                  src="./icons/search.svg"
+                  alt="search"
+                />
+              </button>
+            </form>
+            <section className="w-full">
+              <h2 className="text-3xl m-4"> Curated by developers </h2>
+              <ul className="flex flex-row items-start flex-wrap">
+                {packages.map(({ name, version }, i) => (
+                  <li key={i}>
+                    <Link to={`/package/${name}`} className="block card">
+                      <div className="card-title">
+                        {name} <span className="text-sm italic text-slate-300">{version}</span>{' '}
+                      </div>
+                      <div>
+                        <span className="text-slate-300">By&nbsp;</span>
+                        <span className="text-slate-400">Sindre Horus</span>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </>
         )}
       </HistoryContext.Consumer>
     </section>

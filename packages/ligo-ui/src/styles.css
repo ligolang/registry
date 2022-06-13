@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /* This won't be included in your compiled CSS unless you actually use it */
+  .card {
+      border-radius: 8px;
+      border: 1px solid #EEE;
+      padding: 1rem;
+      margin: 0.5rem;
+      min-width: 250px;
+  }
+
+  .card-title {
+      font-weight: 600;
+      color: #444;
+      font-size: 1.25rem;
+  }
+}
+
 html,
 body {
   height: 100%;
