@@ -18,7 +18,16 @@ let routes = [
     path: '',
     action: () => {
       return fetch(`/-/ui/featured`)
-        .then((r) => r.json())
+        .then(
+          (r) => {
+            if (r.status === 200) {
+              return r.json();
+            } else {
+              return [];
+            }
+          },
+          () => [] // TODO(prometheansacrifice) error handling
+        )
         .then((packages) => (
           <Home
             packages={packages
