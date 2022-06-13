@@ -30,7 +30,7 @@ react.get('*', function (request, response) {
         debug(e.message);
         debug(JSON.stringify(e));
         // @ts-ignore
-        response.status(e.status).end();
+        response.status(500).end();
       });
   });
 });
