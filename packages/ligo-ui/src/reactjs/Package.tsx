@@ -73,33 +73,39 @@ export function Package({
   } else {
     authorSection = <div />;
   }
+  let markdownEle;
+  if (markdown === '') {
+    markdownEle = <p> No README found </p>;
+  } else {
+    markdownEle = (
+      <ReactMarkdown
+        components={{
+          code({ inline, className, children, ...props }) {
+            const match = /language-(\w+)/.exec(className || '');
+            return !inline && match ? (
+              // @ts-ignore
+              <SyntaxHighlighter language={match[1]} PreTag="div" {...props}>
+                {String(children).replace(/\n$/, '')}
+              </SyntaxHighlighter>
+            ) : (
+              <code className={className} {...props}>
+                {children}
+              </code>
+            );
+          },
+        }}
+      >
+        {markdown.replace(`# ${name}`, '')}
+      </ReactMarkdown>
+    );
+  }
   return (
     <main>
       <AppHeader />
       <section className="flex flex-col pb-12">
         <PackageViewHeader name={name} description={description} />
         <section className="flex lg:flex-row flex-col">
-          <article className="flex-auto lg:w-1/3">
-            <ReactMarkdown
-              components={{
-                code({ inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '');
-                  return !inline && match ? (
-                    // @ts-ignore
-                    <SyntaxHighlighter language={match[1]} PreTag="div" {...props}>
-                      {String(children).replace(/\n$/, '')}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code className={className} {...props}>
-                      {children}
-                    </code>
-                  );
-                },
-              }}
-            >
-              {markdown.replace(`# ${name}`, '')}
-            </ReactMarkdown>
-          </article>
+          <article className="flex-auto lg:w-1/3">{markdownEle}</article>
           <aside className="flex-auto mt-12 flex-none w-full lg:w-1/3 lg:mt-0">
             {authorSection}
             {websiteSection}
