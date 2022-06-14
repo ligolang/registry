@@ -32,6 +32,7 @@ export default class VerdaccioProcess {
       silent: false,
       env: {
         ...process.env,
+        FEATURED_PACKAGES_SOURCE: path.join(__dirname, 'partials', 'featured-packages.json'),
         CRA_BUILD_DIR: path.join(__dirname, '..', '..', 'packages', 'ligo-ui', 'build'),
       },
     };

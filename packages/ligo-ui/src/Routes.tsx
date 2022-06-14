@@ -30,6 +30,10 @@ let routes = (addr: any) => {
               if (r.status === 200) {
                 return r.json();
               } else {
+                // eslint-disable-next-line no-console
+                console.log('/-/ui/featured returned', r.status);
+                // eslint-disable-next-line no-console
+                r.text().then(console.log);
                 return [];
               }
             },
