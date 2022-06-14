@@ -29,6 +29,13 @@ describe('/ (Verdaccio Page)', () => {
     ).toContain('Search');
   });
 
+  test('Home: should contain a featured packages section', async () => {
+    let h2Handle = await page.$('h2');
+    expect(await h2Handle.evaluate((node) => node.innerText)).toMatch('Curated by developers');
+    let featuredPackageCardHandle = await page.$('.card > .card-title');
+    expect(await featuredPackageCardHandle.evaluate((node) => node.innerText)).toMatch('pk1-test');
+  });
+
   test('Search Results: should load No results', async () => {
     await page.goto('http://localhost:55558/search/a-pkg-that-doesnt-exist');
     let h1Handle = await page.$('h1');
