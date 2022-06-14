@@ -47,11 +47,13 @@ describe('/ (Verdaccio Page)', () => {
     );
   });
 
-  test.skip('Package View: should load package Readme and other details', async () => {
+  test('Package View: should load package Readme and other details', async () => {
     await page.goto('http://localhost:55558/package/pk1-test');
     await global.__SERVER__.putPackage(testPackageMetadata.name, testPackageMetadata);
     await page.waitForTimeout(5000);
-    let h1Handle = await page.$('html');
-    expect(await h1Handle.evaluate((node) => node.innerText)).toContain('No results');
+    let h1Handle = await page.$('h1');
+    expect(await h1Handle.evaluate((node) => node.innerText)).toContain('pk1-test');
+    let articleH1Handle = await page.$('article h1');
+    expect(await articleH1Handle.evaluate((node) => node.innerText)).toMatch('test');
   });
 });

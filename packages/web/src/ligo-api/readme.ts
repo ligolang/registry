@@ -54,26 +54,41 @@ function addReadmeWebApi(config: Config, storage: Storage, auth: IAuth): Router 
         // @ts-ignore
         let latestVersion = info['dist-tags'].latest;
         let version = req.params.version ?? latestVersion;
-        let readmeFilename = info.versions[version].readmeFilename;
-        let fs = require('fs');
-        let path = require('path');
-        let os = require('os');
-        let rimraf = require('rimraf');
-        let xPath = path.join(os.tmpdir(), `${info.name}-${version}`);
+        let pkgMetadata = info.versions[version];
+        if (pkgMetadata.readme) {
+          next({ data: pkgMetadata.readme });
+        } else if (pkgMetadata.readmeFilename) {
+          debug('No readme property in the metdata. Looking for readmeFilename property');
+          let readmeFilename = pkgMetadata.readmeFilename;
+          let fs = require('fs');
+          let path = require('path');
+          let os = require('os');
+          let rimraf = require('rimraf');
+          let xPath = path.join(os.tmpdir(), `${info.name}-${version}`);
 
-        rimraf.sync(xPath);
-        fs.mkdirSync(xPath);
-        await tar.x({
-          C: xPath,
-          file: path.join(config.storage, info.name, `${info.name}-${version}.tgz`),
-        });
-        let readmePath = path.join(xPath, 'package', readmeFilename);
-        let readme = fs.readFileSync(readmePath).toString();
-        // @ts-ignore
-        // debug(info);
-        // @ts-ignore
-        next({ data: readme });
-        // next(parseReadme(info.name, readme));
+          rimraf.sync(xPath);
+          fs.mkdirSync(xPath);
+          await tar.x({
+            C: xPath,
+            file: path.join(
+              path.dirname(config.configPath),
+              config.storage,
+              info.name,
+              `${info.name}-${version}.tgz`
+            ),
+          });
+
+          let readmePath = path.join(xPath, 'package', readmeFilename);
+          let readme = fs.readFileSync(readmePath).toString();
+          // @ts-ignore
+          // debug(info);
+          // @ts-ignore
+          next({ data: readme });
+          // next(parseReadme(info.name, readme));
+        } else {
+          debug('No readme found');
+          next({ data: '' });
+        }
       } catch (e) {
         debug(e);
         next(sanitizyReadme(NOT_README_FOUND));
