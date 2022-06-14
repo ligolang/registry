@@ -1,6 +1,7 @@
 import buildDebug from 'debug';
 import { Router } from 'express';
 import { promises as fs } from 'fs';
+import fetch from 'node-fetch';
 
 import { IAuth } from '@verdaccio/auth';
 import { errorUtils } from '@verdaccio/core';
