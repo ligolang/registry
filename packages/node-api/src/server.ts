@@ -111,7 +111,7 @@ export async function initServer(
     const [addr] = getListListenAddresses(port, config.listen);
     const logger = setup(config?.log as LoggerConfigItem);
     displayExperimentsInfoBox(config.flags);
-    const app = await server(config);
+    const app = await server(config, addr);
     const serverFactory = createServerFactory(config, addr, app);
     serverFactory
       .listen(addr.port || addr.path, addr.host, (): void => {
@@ -184,6 +184,6 @@ export async function runServer(config?: string | ConfigRuntime): Promise<any> {
   displayExperimentsInfoBox(configurationParsed.flags);
   // FIXME: get only the first match, the multiple address will be removed
   const [addr] = getListListenAddresses(undefined, configurationParsed.listen);
-  const app = await server(configurationParsed);
+  const app = await server(configurationParsed, addr);
   return createServerFactory(configurationParsed, addr, app);
 }

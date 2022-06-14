@@ -4,7 +4,7 @@ import StdlibPath from 'path';
 import renderReactApp from './middleware/render-react-app';
 import { ligoWebAPI } from './middleware/web-api';
 
-export default (config, auth, storage) => {
+export default (config, auth, storage, addr) => {
   // eslint-disable-next-line new-cap
   const app = express.Router();
 
@@ -30,6 +30,6 @@ export default (config, auth, storage) => {
   app.use(auth.apiJWTmiddleware());
   app.use('/-/ui/', ligoWebAPI(config, auth, storage));
   // load application
-  app.use('/', renderReactApp);
+  app.use('/', renderReactApp(addr));
   return app;
 };
