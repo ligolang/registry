@@ -25,6 +25,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/node-fetch": "2.6.1",
+    "node-fetch": "2.6.7",
     "@ligo-registry/ui": "workspace:0.1.0-dev",
     "@verdaccio/auth": "workspace:6.0.0-6-next.22",
     "@verdaccio/config": "workspace:6.0.0-6-next.14",
