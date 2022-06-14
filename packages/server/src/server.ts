@@ -28,7 +28,7 @@ export interface IPluginMiddleware<T> extends IPlugin<T> {
 
 const debug = buildDebug('verdaccio:server');
 
-const defineAPI = function (config: IConfig, storage: Storage): any {
+const defineAPI = function (config: IConfig, storage: Storage, addr: any): any {
   const auth: Auth = new Auth(config);
   const app: Application = express();
   const limiter = new RateLimit(config.serverSettings.rateLimit);
@@ -99,7 +99,7 @@ const defineAPI = function (config: IConfig, storage: Storage): any {
   // For WebUI & WebUI API
   if (_.get(config, 'web.enable', true)) {
     // @ts-ignore
-    app.use(ligoWebMiddleware(config, auth, storage));
+    app.use(ligoWebMiddleware(config, auth, storage, addr));
   } else {
     app.get('/', function (req: $RequestExtend, res: $ResponseExtend, next: $NextFunctionVer) {
       next(errorUtils.getNotFound(API_ERROR.WEB_DISABLED));
@@ -138,7 +138,7 @@ const defineAPI = function (config: IConfig, storage: Storage): any {
   return app;
 };
 
-export default (async function (configHash: ConfigRuntime): Promise<any> {
+export default (async function (configHash: ConfigRuntime, addr: any): Promise<any> {
   debug('start server');
   const config: IConfig = new AppConfig(_.cloneDeep(configHash));
   // register middleware plugins
@@ -164,5 +164,5 @@ export default (async function (configHash: ConfigRuntime): Promise<any> {
     logger.error({ error: err.msg }, 'storage has failed: @{error}');
     throw new Error(err);
   }
-  return defineAPI(config, storage);
+  return defineAPI(config, storage, addr);
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOMClient from 'react-dom';
 
 import { HistoryContext, history } from './HistoryContext';
-import { resolve } from './Routes';
+import { init as initRouter, resolve } from './Routes';
 import './reactjs/Package.css';
 import './styles.css';
 
@@ -13,7 +13,9 @@ function render(path: string) {
     throw new Error("Container id='root' doesn't exist");
   }
 
-  resolve(path).then((SelectedReactNode) =>
+  let router = initRouter(null);
+
+  resolve(router, path).then((SelectedReactNode) =>
     ReactDOMClient.hydrate(
       <HistoryContext.Provider value={history}>{SelectedReactNode}</HistoryContext.Provider>,
       container
