@@ -42,10 +42,10 @@ export function FirstFold(props: props) {
             </form>
             <section className="w-full">
               <h2 className="text-3xl m-4"> Curated by developers </h2>
-              <ul className="flex flex-row items-start flex-wrap">
+              <ul className="w-full flex flex-row items-start flex-wrap">
                 {packages.map(({ name, version }, i) => (
-                  <li key={i}>
-                    <Link to={`/package/${name}`} className="block card">
+                  <li className="h-30 block card" key={i}>
+                    <Link to={`/package/${name}`}>
                       <div className="card-title">
                         {name} <span className="text-sm italic text-slate-300">{version}</span>{' '}
                       </div>

@@ -20,8 +20,15 @@ export function Packages({ packages }: props) {
       <>
         <AppHeader />
         <h1 className="text-center"> All Packages </h1>
-        <section className="md:w-2/3 m-auto p-8 mt-16">
-          <PackagesList packages={packages} />
+        <section className="p-8 mt-16">
+          <PackagesList
+            packages={packages
+              .concat(packages)
+              .concat(packages)
+              .concat(packages)
+              .concat(packages)
+              .concat(packages)}
+          />
         </section>
       </>
     );

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import type { pkg } from '../types';
 import { Header as AppHeader } from './Header';
-import { PackagesList } from './PackagesList';
+import { Link } from './Link';
 
 type result = {
   package: pkg;
@@ -15,6 +15,7 @@ export function Search({ results, searchTerm }: { searchTerm: string; results: r
       </section>
     );
   } else {
+    let packages = results.map(({ package: p }) => p);
     return (
       <>
         <AppHeader />
@@ -23,7 +24,21 @@ export function Search({ results, searchTerm }: { searchTerm: string; results: r
             {' '}
             {results.length} results found for <span className="mg-search-term">{searchTerm}</span>{' '}
           </h1>
-          <PackagesList packages={results.map(({ package: p }) => p)} />
+
+          {/* @ts-ignore */}
+          {packages.map((pkg, i: number) => (
+            <section key={i} className="mt-2 p-6 border rounded-xl border-gray">
+              <h2>
+                <Link to={'/package/' + encodeURIComponent(pkg.name)}>{pkg.name}</Link>
+              </h2>
+              <p>v{pkg.version}</p>
+              <p>
+                {' '}
+                <span className="text-gray-400">By</span> {pkg.author?.name || ''}{' '}
+              </p>
+              <p>{pkg.description}</p>
+            </section>
+          ))}
         </section>
       </>
     );
