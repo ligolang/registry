@@ -21,7 +21,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.LIGO_REGISTRY_DOCKER }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
         # Only push if on main branch
