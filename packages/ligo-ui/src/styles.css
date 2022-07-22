@@ -9,7 +9,9 @@
       border: 1px solid #EEE;
       padding: 1rem;
       margin: 0.5rem;
-      min-width: 250px;
+      width: 22.5%;
+      box-sizing: border-box;
+      text-overflow: ellipsis;
   }
 
   .card-title {

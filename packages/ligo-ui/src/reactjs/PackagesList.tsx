@@ -10,21 +10,29 @@ type props = {
 export function PackagesList(props: props) {
   let { packages } = props;
   return (
-    <>
-      {/* @ts-ignore */}
-      {packages.map((pkg, i: number) => (
-        <section key={i} className="mt-2 p-4 border rounded border-gray">
-          <h2>
-            <Link to={'/package/' + encodeURIComponent(pkg.name)}>{pkg.name}</Link>
-          </h2>
-          <p>v{pkg.version}</p>
-          <p>
-            {' '}
-            <span className="text-gray-400">By</span> {pkg.author?.name || ''}{' '}
-          </p>
-          <p>{pkg.description}</p>
-        </section>
-      ))}
-    </>
+    <ul className="w-full flex flex-row items-start flex-wrap">
+      {packages.map(({ name, version, description }, i) => {
+        let descriptionSliced;
+        if (description.length > 30) {
+          descriptionSliced = description.slice(0, 27) + ' ..';
+        } else {
+          descriptionSliced = description;
+        }
+        return (
+          <li className="h-30 block card" key={i}>
+            <Link to={`/package/${name}`}>
+              <div className="card-title">
+                {name} <span className="text-sm italic text-slate-300">{version}</span>{' '}
+              </div>
+              <div>
+                <span className="text-slate-300">By&nbsp;</span>
+                <span className="text-slate-400">Sindre Horus</span>
+              </div>
+              <p>{descriptionSliced}</p>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
