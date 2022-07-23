@@ -31,5 +31,5 @@ export function getLocalRegistryTarballUri(
   // header only set with proxy that setup with HTTPS
   const domainRegistry = getPublicUrl(urlPrefix || '', requestOptions);
 
-  return `${domainRegistry}/-/api/${pkgName}/-/${tarballName}`;
+  return `${domainRegistry}/-/api${pkgName}/-/${tarballName}`;
 }
