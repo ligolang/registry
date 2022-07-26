@@ -11,7 +11,7 @@ export function PackagesList(props: props) {
   let { packages } = props;
   return (
     <ul className="w-full flex flex-row items-start flex-wrap">
-      {packages.map(({ name, version, description }, i) => {
+      {packages.map(({ name, version, description, author }, i) => {
         let descriptionSliced;
         if (description.length > 30) {
           descriptionSliced = description.slice(0, 27) + ' ..';
@@ -26,7 +26,7 @@ export function PackagesList(props: props) {
               </div>
               <div>
                 <span className="text-slate-300">By&nbsp;</span>
-                <span className="text-slate-400">Sindre Horus</span>
+                <span className="text-slate-400">{author}</span>
               </div>
               <p>{descriptionSliced}</p>
             </Link>
