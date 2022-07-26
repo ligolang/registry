@@ -43,7 +43,7 @@ export function FirstFold(props: props) {
             <section className="w-full">
               <h2 className="text-3xl m-4"> Curated by developers </h2>
               <ul className="w-full flex flex-row items-start flex-wrap">
-                {packages.map(({ name, version }, i) => (
+                {packages.map(({ name, version, author }, i) => (
                   <li className="h-30 block card" key={i}>
                     <Link to={`/package/${name}`}>
                       <div className="card-title">
@@ -51,7 +51,7 @@ export function FirstFold(props: props) {
                       </div>
                       <div>
                         <span className="text-slate-300">By&nbsp;</span>
-                        <span className="text-slate-400">Sindre Horus</span>
+                        <span className="text-slate-400">{author?.name || 'Anonymous'}</span>
                       </div>
                     </Link>
                   </li>
