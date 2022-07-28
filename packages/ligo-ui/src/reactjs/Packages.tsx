@@ -14,7 +14,7 @@ function PackagesList(props: props) {
     <ul className="w-full md:w-2/3 lg:w-1/2 m-auto">
       {packages.map(({ name, version, description, author }, i) => {
         return (
-          <li className="rounded-lg border-2 border-slate-800 p-4 m-4 block" key={i}>
+          <li className="rounded-lg border border-slate-200 p-4 m-4 block" key={i}>
             <Link to={`/package/${name}`}>
               <div className="card-title">
                 {name} <span className="text-sm italic text-slate-300">{version}</span>{' '}
